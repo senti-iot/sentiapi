@@ -14,8 +14,8 @@ script:
 deploy:
 - provider: script
   skip_cleanup: true
-  script: rsync -r --quiet ubuntu@kanata.webhouse.net:/srv/www/odeumcode/api.dashboard.senti.cloud
-  # script: rsync -r --quiet $TRAVIS_BUILD_DIR/ ubuntu@kanata.webhouse.net:/srv/www/odeumcode/api.dashboard.senti.cloud
+  #script: rsync -r --quiet ubuntu@kanata.webhouse.net:/srv/www/odeumcode/api.dashboard.senti.cloud
+  script: rsync -r --quiet $TRAVIS_BUILD_DIR/ ubuntu@kanata.webhouse.net:/srv/www/odeumcode/api.dashboard.senti.cloud
   on:
     branch: master
 
@@ -24,5 +24,6 @@ before_deploy:
 - eval "$(ssh-agent -s)"
 - chmod 600 ./deploy_rsa
 - ssh-add ./deploy_rsa
+- pwd
 
 # GitHub -> Travis -> AWS testrun 1
