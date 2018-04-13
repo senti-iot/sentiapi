@@ -9,6 +9,7 @@ addons:
 
 script:
 - cp ./README.md ./README.bak
+- pwd
 
 deploy:
 - provider: script
@@ -19,9 +20,9 @@ deploy:
     branch: master
 
 before_deploy:
-- openssl aes-256-cbc -K $encrypted_bc40214732cb_key -iv $encrypted_bc40214732cb_iv -in deploy_rsa.enc -out ./tmp/deploy_rsa -d
+- openssl aes-256-cbc -K $encrypted_bc40214732cb_key -iv $encrypted_bc40214732cb_iv -in ./deploy_rsa.enc -out ./deploy_rsa -d
 - eval "$(ssh-agent -s)"
-- chmod 600 /tmp/deploy_rsa
-- ssh-add /tmp/deploy_rsa
+- chmod 600 ./deploy_rsa
+- ssh-add ./deploy_rsa
 
 # GitHub -> Travis -> AWS testrun 1
