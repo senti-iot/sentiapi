@@ -1,6 +1,3 @@
-#language: node_js
-#node_js:
-#- stable
 notifications:
   email: true
   slack: webhouseteam:82qu1PX5R5wkYNCW5x6fVlhu
@@ -8,22 +5,21 @@ addons:
   ssh_known_hosts: kanata.webhouse.net
 
 script:
-- cp ./README.md ./README.bak
 - pwd
 
 deploy:
 - provider: script
   skip_cleanup: true
   #script: rsync -r --quiet ubuntu@kanata.webhouse.net:/srv/www/odeumcode/api.dashboard.senti.cloud
-  script: rsync -r --quiet $TRAVIS_BUILD_DIR/ ubuntu@kanata.webhouse.net:/srv/www/odeumcode/api.dashboard.senti.cloud
+  script: rsync -r $TRAVIS_BUILD_DIR/ ubuntu@kanata.webhouse.net:/srv/www/odeumcode/api.dashboard.senti.cloud
   on:
     branch: master
 
 before_deploy:
-- openssl aes-256-cbc -K $encrypted_bc40214732cb_key -iv $encrypted_bc40214732cb_iv -in ./deploy_rsa.enc -out ./deploy_rsa -d
+- openssl aes-256-cbc -K $encrypted_bc40214732cb_key -iv $encrypted_bc40214732cb_iv -in ./deploy_rsa.enc -out ./tmp/deploy_rsa -d
 - eval "$(ssh-agent -s)"
-- chmod 600 ./deploy_rsa
-- ssh-add ./deploy_rsa
+- chmod 600 ./tmp/deploy_rsa
+- ssh-add ./tmp/deploy_rsa
 - pwd
 
 # GitHub -> Travis -> AWS testrun 1
