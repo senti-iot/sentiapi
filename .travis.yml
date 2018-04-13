@@ -16,7 +16,6 @@ deploy:
     branch: master
 
 before_deploy:
-# - mkdir ./tmp
 - openssl aes-256-cbc -K $encrypted_bc40214732cb_key -iv $encrypted_bc40214732cb_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
 - eval "$(ssh-agent -s)"
 - chmod 600 /tmp/deploy_rsa
