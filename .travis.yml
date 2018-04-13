@@ -1,11 +1,15 @@
-language: node_js
-node_js:
-- stable
+#language: node_js
+#node_js:
+#- stable
 notifications:
   email: true
   slack: webhouseteam:82qu1PX5R5wkYNCW5x6fVlhu
 addons:
   ssh_known_hosts: kanata.webhouse.net
+
+script:
+- cp ./README.md ./README.bak
+
 deploy:
 - provider: script
   skip_cleanup: true
