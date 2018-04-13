@@ -4,13 +4,12 @@ notifications:
 addons:
   ssh_known_hosts: kanata.webhouse.net
 
-script:
-- pwd
+# script:
+# - pwd
 
 deploy:
 - provider: script
   skip_cleanup: true
-  #script: rsync -r --quiet ubuntu@kanata.webhouse.net:/srv/www/odeumcode/api.dashboard.senti.cloud
   script: rsync -r $TRAVIS_BUILD_DIR/ ubuntu@kanata.webhouse.net:/srv/www/odeumcode/api.dashboard.senti.cloud
   on:
     branch: master
