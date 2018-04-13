@@ -4,8 +4,8 @@ notifications:
 addons:
   ssh_known_hosts: kanata.webhouse.net
 
-# script:
-# - pwd
+script:
+- pwd
 
 deploy:
 - provider: script
